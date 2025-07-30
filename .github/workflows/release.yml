@@ -26,15 +26,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Build application
         run: |
-          yarn gulp compile
-          yarn gulp vscode-${{ matrix.platform }}
+          npm run gulp compile
+          npm run gulp vscode-${{ matrix.platform }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
