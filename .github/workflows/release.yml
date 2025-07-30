@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       matrix:
         platform: [darwin-arm64]
@@ -25,11 +25,20 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20.18.2'
           cache: 'npm'
+
+      - name: Install system dependencies
+        run: |
+          # Install required system dependencies for macOS
+          brew install python3
+          brew install libtool
+          brew install pkg-config
 
       - name: Install dependencies
         run: npm ci
+        env:
+          NODE_OPTIONS: "--max-old-space-size=8192"
 
       - name: Build application
         run: |
@@ -37,6 +46,7 @@ jobs:
           npm run gulp vscode-${{ matrix.platform }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_OPTIONS: "--max-old-space-size=8192"
 
       - name: Create release assets
         run: |
