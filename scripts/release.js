@@ -28,11 +28,10 @@ fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
 // Build the application
 console.log('🔨 Building application...');
 try {
-	execSync('yarn gulp clean', { stdio: 'inherit' });
-	execSync('yarn gulp compile', { stdio: 'inherit' });
+	execSync('npm run gulp compile', { stdio: 'inherit' });
 	console.log('✅ Build completed successfully');
 } catch (error) {
-	console.error('❌ Build failed:', error.message);
+	console.log('❌ Build failed:', error.message);
 	process.exit(1);
 }
 

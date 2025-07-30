@@ -1,7 +1,7 @@
 {
 	"nameShort": "Void",
 	"nameLong": "Void",
-	"voidVersion": "1.4.9",
+	"voidVersion": "1.4.10",
 	"voidRelease": "0044",
 	"applicationName": "void",
 	"dataFolderName": ".void-editor",
@@ -39,5 +39,10 @@
 		"itemUrl": "https://marketplace.visualstudio.com/items"
 	},
 	"builtInExtensions": [],
-	"linkProtectionTrustedDomains": ["https://voideditor.com", "https://voideditor.dev", "https://github.com/voideditor/void", "https://ollama.com"]
+	"linkProtectionTrustedDomains": [
+		"https://voideditor.com",
+		"https://voideditor.dev",
+		"https://github.com/voideditor/void",
+		"https://ollama.com"
+	]
 }
