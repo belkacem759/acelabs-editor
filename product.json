@@ -5,7 +5,7 @@
 	"voidRelease": "0044",
 	"applicationName": "void",
 	"dataFolderName": ".void-editor",
-	"updateUrl": "https://your-update-server.com",
+	"updateUrl": "https://github.com/belkacem759/acelabs-editor/releases/latest/download",
 	"downloadUrl": "https://github.com/belkacem759/acelabs-editor/releases/latest",
 	"win32MutexName": "voideditor",
 	"licenseName": "MIT",

@@ -48,17 +48,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_OPTIONS: "--max-old-space-size=8192"
 
-      - name: Create release assets
+      - name: Build with electron-builder
         run: |
-          # Create zip files for each platform
-          cd VSCode-${{ matrix.platform }}
-          zip -r ../void-${{ matrix.platform }}-${{ github.ref_name }}.zip .
+          npx electron-builder --mac --arm64 --x64 --publish=never
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_OPTIONS: "--max-old-space-size=8192"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: void-${{ matrix.platform }}-${{ github.ref_name }}
-          path: void-${{ matrix.platform }}-${{ github.ref_name }}.zip
+          path: dist/*.zip
 
   release:
     needs: build
@@ -73,14 +74,15 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            void-*-${{ github.ref_name }}.zip
+            void-*-${{ github.ref_name }}/*.zip
           body: |
             ## What's New in ${{ github.ref_name }}
 
             ### Downloads
             - macOS Apple Silicon: `void-darwin-arm64-${{ github.ref_name }}.zip`
+            - macOS Intel: `void-darwin-x64-${{ github.ref_name }}.zip`
 
             ### OTA Updates
-            This release supports automatic over-the-air updates via GitHub releases.
+            This release supports automatic over-the-air updates via electron-updater.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

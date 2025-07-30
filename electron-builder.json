@@ -1,0 +1,61 @@
+{
+  "appId": "com.voideditor.code",
+  "productName": "Void",
+  "directories": {
+    "output": "dist"
+  },
+  "files": [
+    "out/**/*",
+    "!node_modules/**/*",
+    "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+    "!.editorconfig",
+    "!**/._*",
+    "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+    "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+    "!**/{appveyor.yml,.travis.yml,circle.yml}",
+    "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+  ],
+  "mac": {
+    "target": [
+      {
+        "target": "zip",
+        "arch": ["arm64", "x64"]
+      }
+    ],
+    "category": "public.app-category.developer-tools",
+    "icon": "resources/darwin/code.icns",
+    "hardenedRuntime": true,
+    "gatekeeperAssess": false,
+    "entitlements": "resources/darwin/entitlements.mac.plist",
+    "entitlementsInherit": "resources/darwin/entitlements.mac.plist"
+  },
+  "win": {
+    "target": [
+      {
+        "target": "zip",
+        "arch": ["x64", "arm64"]
+      }
+    ],
+    "icon": "resources/win32/code.ico"
+  },
+  "linux": {
+    "target": [
+      {
+        "target": "zip",
+        "arch": ["x64", "arm64"]
+      }
+    ],
+    "icon": "resources/linux/code.png"
+  },
+  "publish": [
+    {
+      "provider": "github",
+      "owner": "belkacem759",
+      "repo": "acelabs-editor",
+      "private": false,
+      "releaseType": "release"
+    }
+  ],
+  "afterSign": "scripts/notarize.js",
+  "afterAllArtifactBuild": "scripts/after-all-artifact-build.js"
+}
