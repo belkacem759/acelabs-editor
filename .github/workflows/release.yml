@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [win32-x64, darwin-x64, darwin-arm64, linux-x64]
+        platform: [win32-x64]
 
     steps:
       - name: Checkout code
@@ -27,12 +27,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-
-      - name: Install Linux dependencies
-        if: matrix.platform == 'linux-x64'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential g++ libx11-dev libxkbfile-dev libsecret-1-dev libkrb5-dev python-is-python3
 
       - name: Install dependencies
         run: npm ci
@@ -75,9 +69,6 @@ jobs:
 
             ### Downloads
             - Windows x64: `void-win32-x64-${{ github.ref_name }}.zip`
-            - macOS Intel: `void-darwin-x64-${{ github.ref_name }}.zip`
-            - macOS Apple Silicon: `void-darwin-arm64-${{ github.ref_name }}.zip`
-            - Linux x64: `void-linux-x64-${{ github.ref_name }}.zip`
 
             ### OTA Updates
             This release supports automatic over-the-air updates via GitHub releases.
