@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [win32-x64]
+        platform: [darwin-arm64]
 
     steps:
       - name: Checkout code
@@ -68,7 +68,7 @@ jobs:
             ## What's New in ${{ github.ref_name }}
 
             ### Downloads
-            - Windows x64: `void-win32-x64-${{ github.ref_name }}.zip`
+            - macOS Apple Silicon: `void-darwin-arm64-${{ github.ref_name }}.zip`
 
             ### OTA Updates
             This release supports automatic over-the-air updates via GitHub releases.
