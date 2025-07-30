@@ -5,6 +5,8 @@
 	"voidRelease": "0044",
 	"applicationName": "void",
 	"dataFolderName": ".void-editor",
+	"updateUrl": "https://your-update-server.com",
+	"downloadUrl": "https://github.com/aceailabs/acelabs-logs/releases/latest",
 	"win32MutexName": "voideditor",
 	"licenseName": "MIT",
 	"licenseUrl": "https://github.com/voideditor/void/blob/main/LICENSE.txt",
@@ -37,10 +39,5 @@
 		"itemUrl": "https://marketplace.visualstudio.com/items"
 	},
 	"builtInExtensions": [],
-	"linkProtectionTrustedDomains": [
-		"https://voideditor.com",
-		"https://voideditor.dev",
-		"https://github.com/voideditor/void",
-		"https://ollama.com"
-	]
+	"linkProtectionTrustedDomains": ["https://voideditor.com", "https://voideditor.dev", "https://github.com/voideditor/void", "https://ollama.com"]
 }

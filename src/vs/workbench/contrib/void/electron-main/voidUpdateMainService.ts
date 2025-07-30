@@ -95,7 +95,8 @@ export class VoidMainUpdateService extends Disposable implements IVoidUpdateServ
 
 	private async _manualCheckGHTagIfDisabled(explicit: boolean): Promise<VoidCheckUpdateRespose> {
 		try {
-			const response = await fetch('https://api.github.com/repos/voideditor/binaries/releases/latest');
+			// Replace with your own GitHub repository
+			const response = await fetch('https://api.github.com/repos/aceailabs/acelabs-logs/releases/latest');
 
 			const data = await response.json();
 			const version = data.tag_name;
@@ -105,47 +106,44 @@ export class VoidMainUpdateService extends Disposable implements IVoidUpdateServ
 
 			const isUpToDate = myVersion === latestVersion // only makes sense if response.ok
 
-			let message: string | null
-			let action: 'reinstall' | undefined
-
 			// explicit
 			if (explicit) {
 				if (response.ok) {
 					if (!isUpToDate) {
-						message = 'A new version of AceLabs is available! Please reinstall (auto-updates are disabled on this OS) - it only takes a second!'
-						action = 'reinstall'
+						return {
+							message: 'A new version of AceLabs is available!',
+							action: 'reinstall'
+						}
+					} else {
+						return {
+							message: 'You are using the latest version of AceLabs.'
+						}
 					}
-					else {
-						message = 'AceLabs is up-to-date!'
+				} else {
+					return {
+						message: 'Failed to check for updates.'
 					}
-				}
-				else {
-					message = `An error occurred when fetching the latest GitHub release tag. Please try again in ~5 minutes, or reinstall.`
-					action = 'reinstall'
 				}
 			}
+
 			// not explicit
-			else {
-				if (response.ok && !isUpToDate) {
-					message = 'A new version of AceLabs is available! Please reinstall (auto-updates are disabled on this OS) - it only takes a second!'
-					action = 'reinstall'
-				}
-				else {
-					message = null
+			if (response.ok && !isUpToDate) {
+				return {
+					message: 'A new version of AceLabs is available!',
+					action: 'reinstall'
 				}
 			}
-			return { message, action } as const
-		}
-		catch (e) {
+
+			return { message: null }
+		} catch (error) {
+			console.error('Error checking for updates:', error)
 			if (explicit) {
 				return {
-					message: `An error occurred when fetching the latest GitHub release tag: ${e}. Please try again in ~5 minutes.`,
-					action: 'reinstall',
+					message: 'Failed to check for updates.'
 				}
 			}
-			else {
-				return { message: null } as const
-			}
+			return { message: null }
 		}
 	}
 }
+
