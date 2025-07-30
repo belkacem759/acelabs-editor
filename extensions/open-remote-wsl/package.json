@@ -36,7 +36,7 @@
 			"properties": {
 				"remote.WSL.serverInstallPath": {
 					"type": "string",
-					"default": "https://github.com/aceailabs/acelabs-logs/releases/download/${version}/void-reh-${os}-${arch}-${version}.tar.gz",
+					"default": "https://github.com/belkacem759/acelabs-editor/releases/download/${version}/void-reh-${os}-${arch}-${version}.tar.gz",
 					"description": "The path to the VS Code Server in WSL. This is the location where the VS Code Server will be installed in WSL."
 				}
 			}

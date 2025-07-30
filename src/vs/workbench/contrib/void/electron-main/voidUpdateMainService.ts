@@ -96,7 +96,7 @@ export class VoidMainUpdateService extends Disposable implements IVoidUpdateServ
 	private async _manualCheckGHTagIfDisabled(explicit: boolean): Promise<VoidCheckUpdateRespose> {
 		try {
 			// Replace with your own GitHub repository
-			const response = await fetch('https://api.github.com/repos/aceailabs/acelabs-logs/releases/latest');
+			const response = await fetch('https://api.github.com/repos/belkacem759/acelabs-editor/releases/latest');
 
 			const data = await response.json();
 			const version = data.tag_name;

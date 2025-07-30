@@ -60,7 +60,7 @@ console.log(`\n3. Create and push the tag:`);
 console.log(`   git tag v${version}`);
 console.log(`   git push origin v${version}`);
 console.log(`\n4. GitHub Actions will automatically build and release to:`);
-console.log(`   https://github.com/aceailabs/acelabs-logs/releases/tag/v${version}`);
+console.log(`   https://github.com/belkacem759/acelabs-editor/releases/tag/v${version}`);
 
 console.log('📋 Summary of changes:');
 console.log(`- Updated product.json: voidVersion = ${version}`);

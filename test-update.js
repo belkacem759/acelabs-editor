@@ -5,7 +5,7 @@ async function testUpdateSystem() {
 	// Test 1: Check if GitHub API is accessible
 	console.log('1. Testing GitHub API accessibility...');
 	try {
-		const response = await fetch('https://api.github.com/repos/aceailabs/acelabs-logs/releases/latest');
+		const response = await fetch('https://api.github.com/repos/belkacem759/acelabs-editor/releases/latest');
 		const data = await response.json();
 
 		if (response.ok) {
@@ -26,7 +26,7 @@ async function testUpdateSystem() {
 	console.log(`📱 Current version: ${currentVersion}`);
 
 	try {
-		const response = await fetch('https://api.github.com/repos/aceailabs/acelabs-logs/releases/latest');
+		const response = await fetch('https://api.github.com/repos/belkacem759/acelabs-editor/releases/latest');
 		const data = await response.json();
 
 		if (response.ok) {
@@ -56,7 +56,7 @@ async function testUpdateSystem() {
 
 	// Test 4: Check download URL format
 	console.log('\n4. Testing download URL format...');
-	const downloadUrl = 'https://github.com/aceailabs/acelabs-logs/releases/latest';
+	const downloadUrl = 'https://github.com/belkacem759/acelabs-editor/releases/latest';
 	console.log(`📥 Download URL: ${downloadUrl}`);
 
 	console.log('\n🎉 Update system test completed!');

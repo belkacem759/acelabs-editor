@@ -24,7 +24,7 @@ app.get('/api/update/:platform/:quality/:commit', async (req, res) => {
 
 	// Check if there's a newer version
 	if (commit !== latestVersion.commit) {
-		const downloadUrl = `https://github.com/aceailabs/acelabs-logs/releases/download/v${latestVersion.version}/void-${platform}-v${latestVersion.version}.zip`;
+		const downloadUrl = `https://github.com/belkacem759/acelabs-editor/releases/download/v${latestVersion.version}/void-${platform}-v${latestVersion.version}.zip`;
 
 		res.json({
 			version: latestVersion.version,
