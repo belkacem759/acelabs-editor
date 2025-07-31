@@ -4,20 +4,10 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to release (e.g., 1.4.10)'
-        required: true
-        type: string
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        platform: [darwin-arm64]
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,61 +18,13 @@ jobs:
           node-version: '20.18.2'
           cache: 'npm'
 
-      - name: Install system dependencies
-        run: |
-          # Install required system dependencies for macOS
-          brew install python3
-          brew install libtool
-          brew install pkg-config
-
       - name: Install dependencies
         run: npm ci
         env:
           NODE_OPTIONS: "--max-old-space-size=8192"
 
-      - name: Build application
-        run: |
-          npm run gulp compile
-          npm run gulp vscode-${{ matrix.platform }}
+      - name: Build and publish
+        run: npx electron-builder --mac --arm64 --x64 --publish=always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_OPTIONS: "--max-old-space-size=8192"
-
-      - name: Build with electron-builder
-        run: |
-          npx electron-builder --mac --arm64 --x64 --publish=never
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_OPTIONS: "--max-old-space-size=8192"
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: void-${{ matrix.platform }}-${{ github.ref_name }}
-          path: dist/*.zip
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
-
-    steps:
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            void-*-${{ github.ref_name }}/*.zip
-          body: |
-            ## What's New in ${{ github.ref_name }}
-
-            ### Downloads
-            - macOS Apple Silicon: `void-darwin-arm64-${{ github.ref_name }}.zip`
-            - macOS Intel: `void-darwin-x64-${{ github.ref_name }}.zip`
-
-            ### OTA Updates
-            This release supports automatic over-the-air updates via electron-updater.
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
