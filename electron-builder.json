@@ -3,7 +3,7 @@
   "productName": "Void",
   "directories": {
     "output": "dist"
-  }
+  },
   "files": [
     "out/**/*",
     "!node_modules/**/*",
@@ -26,9 +26,7 @@
     "icon": "resources/darwin/code.icns",
     "hardenedRuntime": true,
     "gatekeeperAssess": false,
-    "entitlements": "resources/darwin/entitlements.mac.plist",
-    "entitlementsInherit": "resources/darwin/entitlements.mac.plist"
-  }
+  },
   "win": {
     "target": [
       {
@@ -37,7 +35,7 @@
       }
     ],
     "icon": "resources/win32/code.ico"
-  }
+  },
   "linux": {
     "target": [
       {
@@ -46,7 +44,7 @@
       }
     ],
     "icon": "resources/linux/code.png"
-  }
+  },
   "publish": [
     {
       "provider": "github",
@@ -55,5 +53,5 @@
       "private": false,
       "releaseType": "release"
     }
-  ],
+  ]
 }

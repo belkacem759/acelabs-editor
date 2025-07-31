@@ -23,6 +23,11 @@ jobs:
         env:
           NODE_OPTIONS: "--max-old-space-size=8192"
 
+      - name: Build application
+        run: npm run gulp compile
+        env:
+          NODE_OPTIONS: "--max-old-space-size=8192"
+
       - name: Build and publish
         run: npx electron-builder --mac --arm64 --x64 --publish=always
         env:
